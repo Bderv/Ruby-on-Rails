@@ -1,0 +1,45 @@
+<div class="warning">
+<% if flash[:error] %>
+    <h3><%= flash[:error] %></h3>
+<% end %>
+</div>
+<h1>Successfully logged in as <%= @user.name %></h1>
+<form action="/logout" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Logout">
+</form>
+
+Your name : <%= @user.name %><br>
+Your email : <%= @user.email %><br>
+
+<h4>Create a Secret!</h4>
+<form action="/secrets" method='post'>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <label for="content">Content:</label>
+    <input type="text" name="secret[content]"><br>
+    <input type="submit" value="Create Secret">
+</form><br>
+<a href="/users/<%= @user.id %>/edit">Edit User</a>  |  <form action="/users/<%= @user.id %>" method="POST"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"><input type="hidden" name="_method" value="delete"><input type="submit" value="Delete User"></form>
+<div class ="box">
+    <div class="box1">
+    <h2> <%= @user.name %>'s Secrets </h2>
+    <% @secrets.each do |secret| %>
+        <% if current_user == secret.user %>
+        <h4><%= secret.content %></h4>
+            <form action="/secrets/<%= secret.id %>" method="POST">
+                <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                <input type="hidden" name="_method" value="delete">
+                <input type="submit" value="Delete">
+            </form>
+        <% end %>
+    <% end %>
+    </div>
+    <div class="box2">
+        <h2> Secrets liked by <%= @user.name %> </h2>
+    <% current_user.secrets_liked.each do |secret| %>
+        <h4><%= secret.content %></h4>
+        <p>This secret has <%= secret.likes.size %> Likes</p>
+    <% end %>
+    </div>
+</div>
