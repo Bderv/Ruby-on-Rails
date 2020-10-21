@@ -1,0 +1,27 @@
+<div class="topbar">
+    <div class="left">
+    <h1>Edit <%= @user.first_name %> <%= @user.last_name %>'s Profile </h1>
+    </div>
+    <div class="right">
+    <form action="/logout" method="POST">
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" value="Logout">
+    </form>
+    </div>
+</div>
+<form action="/users/<%= @user.id %>" method='post'>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+    <input type="hidden" name="_method" value="put">
+    <label for="first name">First Name:</label>
+        <input type="text" name="user[first_name]" value="<%= @user.first_name %>"><br>
+        <label for="last name">Last Name:</label>
+        <input type="text" name="user[last_name]" value="<%= @user.last_name %>"><br>
+        <label for="email">Email:</label>
+        <input type="text" name="user[email]" value="<%= @user.email %>"><br>
+        <label for="location">Location:</label>
+        <input type="text" name="user[city]" value="<%= @user.city %>">
+        <%= select_tag "user[state]", options_for_select(states, @user.state) %>
+        <br>
+        <input type="submit" value="Update">
+    </form>
