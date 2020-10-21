@@ -1,0 +1,16 @@
+<h1>New Dojo</h1>
+<div class="warning"><%= flash[:errors] %></div>
+<form action="/dojos" method='post'>
+    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+<label for="branch">Branch:</label>
+<input type="text" name="dojo[branch]"><br>
+<label for="street">Street:</label>
+<input type="text" name="dojo[street]"><br>
+<label for="city">City:</label>
+<input type="text" name="dojo[city]"><br>
+<label for="state">State:</label>
+<input type="text" name="dojo[state]"><br>
+<input type="submit" value="Create">
+</form>
+<br>
+<a href="/dojos">Go Back</a>
