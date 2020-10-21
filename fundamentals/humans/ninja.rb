@@ -1,0 +1,3 @@
+class Ninja < Humans
+
+end

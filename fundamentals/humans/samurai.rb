@@ -1,0 +1,3 @@
+class Samurai < Humans
+
+end
