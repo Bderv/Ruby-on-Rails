@@ -1,0 +1,9 @@
+<h1>Dojos</h1>
+<ul>
+<% @dojos.each do |dojo| %>
+    <li><%= dojo.name %> <%= dojo.city %></li>
+    <% end %>
+<li>dojo 2</li>
+</ul>
+
+<%= render 'form' %>
